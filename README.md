@@ -59,17 +59,11 @@ dinitctl -o enable ufw                 # Firewall
 dinitctl -o enable fwupd               # Firmware updater
 dinitctl -o enable gdm                 # GNOME
 
-# Generate fstab
-genfstab -U / >> /etc/fstab
-
 # Configure doas
 echo "permit persist :wheel" > /etc/doas.conf
 chmod 640 /etc/doas.conf
 
 # Exit and reboot
-exit
-umount -n -R /media/root
-reboot
 ```
 
 ### 6. Post-installation after reboot
