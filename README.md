@@ -113,4 +113,11 @@ OSD Volume Number
 
 # GNOME settings
 dconf load /org/gnome/ < chimera_settings.dconf
+
+# Shell
+doas apk add bash
+chsh -s /bin/bash
+nano ~/.bashrc
+PS1='\[\e[38;5;46m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \$ '
+source ~/.bashrc
 ```
