@@ -16,16 +16,18 @@ lsblk -f
 
 wipefs -a /dev/nvme0n1
 
-# 2G for EFI
+# 1G for EFI
+# 4G for swap
 # Rest for Linux FS
 # Remember to select the type!
 cfdisk /dev/nvme0n1
 
 mkfs.fat -F32 -n EFI /dev/nvme0n1p1
-mkfs.btrfs -L root -f /dev/nvme0n1p2
+mkswap -L swap /dev/nvme0n1p2
+mkfs.btrfs -L root -f /dev/nvme0n1p3
 
 mkdir /media/root
-mount /dev/nvme0n1p2 /media/root
+mount /dev/nvme0n1p3 /media/root
 
 # Create subvolumes
 btrfs subvolume create /media/root/@
@@ -33,9 +35,9 @@ btrfs subvolume create /media/root/@home
 
 # Remount with subvolumes
 umount /media/root
-mount -o subvol=@,noatime,compress=zstd:3 /dev/nvme0n1p2 /media/root
+mount -o subvol=@,noatime,compress=zstd:3 /dev/nvme0n1p3 /media/root
 mkdir -p /media/root/home
-mount -o subvol=@home,noatime,compress=zstd:3 /dev/nvme0n1p2 /media/root/home
+mount -o subvol=@home,noatime,compress=zstd:3 /dev/nvme0n1p3 /media/root/home
 
 # Mount EFI
 mkdir -p /media/root/boot/efi
@@ -67,6 +69,9 @@ dinitctl -o enable gdm                 # GNOME
 echo "permit persist :wheel" > /etc/doas.conf
 chmod 640 /etc/doas.conf
 
+# Swap
+swapon -L swap
+
 # Exit and reboot
 ```
 
@@ -84,7 +89,6 @@ doas ufw status
 # CPU microcode
 doas apk add ucode-intel
 
-
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.brave.Browser
@@ -100,7 +104,6 @@ doas fwupdmgr get-updates
 
 ```
 # Bibata cursor
-
 mkdir -p ~/.local/share/icons
 # Download the latest version
 wget https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata.tar.xz
@@ -108,12 +111,6 @@ wget https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata.tar
 tar -xvf Bibata.tar.xz -C ~/.local/share/icons/
 # Install system-wide (for all users)
 doas tar -xvf Bibata.tar.xz -C /usr/share/icons/
-
-# Battery management for Thinkpad
-
-doas apk add tlp tlp-rdw
-doas dinitctl enable tlp
-doas tlp start
 
 # GNOME extensions
 AppIndicator Support
