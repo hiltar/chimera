@@ -112,4 +112,7 @@ AppIndicator Support
 ArcMenu
 Dash to Panel
 OSD Volume Number
+
+# GNOME settings
+dconf load /org/gnome/ < chimera_settings.dconf
 ```
