@@ -53,10 +53,8 @@ apk update
 apk add btrfs-progs flatpak ufw wget nano fwupd opendoas bolt bolt-dinit gnome gnome-tweaks gnome-shell-extensions papirus-icon-theme
 
 # Enable important services
-dinitctl -o enable bolt                # Thunderbolt dock
 dinitctl -o enable networkmanager      # GNOME default
 dinitctl -o enable ufw                 # Firewall
-dinitctl -o enable fwupd               # Firmware updater
 dinitctl -o enable gdm                 # GNOME
 
 # Configure doas
