@@ -42,6 +42,7 @@ mount /dev/nvme0n1p1 /media/root/boot/efi
 Choose Local install.  
 Set hostname, timezone, root password.  
 Create your user account during the installer.  
+Select kernel.  
 Install GRUB bootloader.  
 
 ### 5. Post-installation during live
