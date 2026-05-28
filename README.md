@@ -55,9 +55,10 @@ mount --rbind /run /media/root/run
 # chroot into installed system disk
 chroot /media/root /bin/bash
 
-# Update system
+# apk operations
 apk update && apk upgrade
 apk add btrfs-progs flatpak ufw wget nano fwupd opendoas gnome-tweaks gnome-shell-extensions papirus-icon-theme papirus-folders
+apk del base-live
 
 # Enable important services
 dinitctl enable bolt                # Thunderbolt dock
