@@ -57,7 +57,7 @@ chroot /media/root /bin/bash
 
 # apk operations
 apk update && apk upgrade
-apk add btrfs-progs flatpak ufw wget nano fwupd opendoas gnome-tweaks gnome-shell-extensions papirus-icon-theme papirus-folders
+apk add btrfs-progs flatpak ufw wget nano fwupd opendoas bolt bolt-dinit gnome-tweaks gnome-shell-extensions papirus-icon-theme papirus-folders
 apk del base-live
 
 # Enable important services
