@@ -105,11 +105,8 @@ doas fwupdmgr get-updates
 ```
 # Bibata cursor
 mkdir -p ~/.local/share/icons
-# Download the latest version
 wget https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata.tar.xz
-# Extract and install for current user
 tar -xvf Bibata.tar.xz -C ~/.local/share/icons/
-# Install system-wide (for all users)
 doas tar -xvf Bibata.tar.xz -C /usr/share/icons/
 
 # GNOME extensions
