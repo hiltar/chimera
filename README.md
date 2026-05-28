@@ -12,6 +12,8 @@
 
 ### 3. Partition the Disk
 ```
+lsblk -f
+
 cfdisk /dev/nvme0n1
 mkfs.fat -F32 -n EFI /dev/nvme0n1p1
 mkfs.btrfs -L root -f /dev/nvme0n1p2
@@ -40,6 +42,7 @@ mount /dev/nvme0n1p1 /media/root/boot/efi
 Choose Local install.  
 Set hostname, timezone, root password.  
 Create your user account during the installer.  
+Install GRUB bootloader.  
 
 ### 5. Post-installation during live
 ```
@@ -53,17 +56,63 @@ chroot /media/root /bin/bash
 
 # Update system
 apk update && apk upgrade
-apk add wget nano doas 
+apk add btrfs-progs flatpak ufw wget nano fwupd opendoas papirus-icon-theme papirus-folders
 
 # Enable important services
 dinitctl enable bolt                # Thunderbolt dock
 dinitctl enable networkmanager      # GNOME default
+dinitctl enable ufw                 # Firewall
+dinitctl enable fwupd               # Firmware updater
 
 # Generate fstab
 genfstab -U / >> /etc/fstab
+
+# Configure doas
+echo "permit persist :wheel" > /etc/doas.conf
+chmod 640 /etc/doas.conf
 
 # Exit and reboot
 exit
 umount -n -R /media/root
 reboot
+```
+
+### 6. Post-installation after reboot
+
+```
+doas apk update && doas apk upgrade
+
+# Firewall
+doas ufw default deny incoming
+doas ufw default allow outgoing
+doas ufw enable
+doas ufw status
+
+# Flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.brave.Browser
+
+# fwupd
+doas fwupdmgr refresh
+doas fwupdmgr get-updates
+```
+
+### 7. Optional
+
+```
+# Bibata cursor
+
+mkdir -p ~/.local/share/icons
+# Download the latest version
+wget https://github.com/ful1e5/Bibata_Cursor/releases/latest/download/Bibata.tar.gz
+# Extract and install for current user
+tar -xvf Bibata.tar.gz -C ~/.local/share/icons/
+# Install system-wide (for all users)
+# doas tar -xvf Bibata.tar.gz -C /usr/share/icons/
+
+# Battery management for Thinkpad (optional)
+
+doas apk add tlp tlp-rdw
+doas dinitctl enable tlp
+doas tlp start
 ```
