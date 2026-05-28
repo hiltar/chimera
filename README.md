@@ -56,7 +56,7 @@ chroot /media/root /bin/bash
 
 # Update system
 apk update && apk upgrade
-apk add btrfs-progs flatpak ufw wget nano fwupd opendoas papirus-icon-theme papirus-folders
+apk add btrfs-progs flatpak ufw wget nano fwupd opendoas gnome-tweaks gnome-shell-extensions papirus-icon-theme papirus-folders
 
 # Enable important services
 dinitctl enable bolt                # Thunderbolt dock
@@ -92,6 +92,7 @@ doas ufw status
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.brave.Browser
 flatpak install flathub org.telegram.desktop
+flatpak install flathub com.mattjakeman.ExtensionManager
 
 # fwupd
 doas fwupdmgr refresh
@@ -116,4 +117,10 @@ tar -xvf Bibata.tar.gz -C ~/.local/share/icons/
 doas apk add tlp tlp-rdw
 doas dinitctl enable tlp
 doas tlp start
+
+# GNOME extensions
+AppIndicator Support
+ArcMenu
+Dash to Panel
+OSD Volume Number
 ```
