@@ -39,32 +39,25 @@ mount /dev/nvme0n1p1 /media/root/boot/efi
 ### 4. Chimera Installer
 `chimera-installer`  
 
-Choose Local install.  
+Choose network install.  
 Set hostname, timezone, root password.  
 Create your user account during the installer.  
 Select kernel.  
 Install GRUB bootloader.  
+Use the mountpoint for `/media/root/`
 
 ### 5. Post-installation during live
 ```
-# Bind mounts + chroot
-mount --types proc /proc /media/root/proc
-mount --rbind /sys /media/root/sys
-mount --rbind /dev /media/root/dev
-mount --rbind /run /media/root/run
-# chroot into installed system disk
-chroot /media/root /bin/bash
-
 # apk operations
-apk update && apk upgrade
-apk add btrfs-progs flatpak ufw wget nano fwupd opendoas bolt bolt-dinit gnome-tweaks gnome-shell-extensions papirus-icon-theme papirus-folders
-apk del base-live
+apk update
+apk add btrfs-progs flatpak ufw wget nano fwupd opendoas bolt bolt-dinit gnome gnome-tweaks gnome-shell-extensions papirus-icon-theme
 
 # Enable important services
-dinitctl enable bolt                # Thunderbolt dock
-dinitctl enable networkmanager      # GNOME default
-dinitctl enable ufw                 # Firewall
-dinitctl enable fwupd               # Firmware updater
+dinitctl -o enable bolt                # Thunderbolt dock
+dinitctl -o enable networkmanager      # GNOME default
+dinitctl -o enable ufw                 # Firewall
+dinitctl -o enable fwupd               # Firmware updater
+dinitctl -o enable gdm                 # GNOME
 
 # Generate fstab
 genfstab -U / >> /etc/fstab
@@ -108,11 +101,11 @@ doas fwupdmgr get-updates
 
 mkdir -p ~/.local/share/icons
 # Download the latest version
-wget https://github.com/ful1e5/Bibata_Cursor/releases/latest/download/Bibata.tar.gz
+wget https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata.tar.xz
 # Extract and install for current user
-tar -xvf Bibata.tar.gz -C ~/.local/share/icons/
+tar -xvf Bibata.tar.xz -C ~/.local/share/icons/
 # Install system-wide (for all users)
-# doas tar -xvf Bibata.tar.gz -C /usr/share/icons/
+doas tar -xvf Bibata.tar.xz -C /usr/share/icons/
 
 # Battery management for Thinkpad
 
