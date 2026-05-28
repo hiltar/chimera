@@ -54,8 +54,8 @@ window-maximized=true
 window-size=(768, 600)
 
 [control-center]
-last-panel='display'
-window-state=(980, 640, false)
+last-panel='bluetooth'
+window-state=(1130, 752, false)
 
 [desktop/app-folders]
 folder-children=['Utilities', 'YaST']
@@ -192,6 +192,7 @@ primary-color='#3465a4'
 secondary-color='#000000'
 
 [desktop/search-providers]
+disabled=['org.gnome.Contacts.desktop', 'org.gnome.Calculator.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.Characters.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Epiphany.desktop']
 sort-order=['org.gnome.Settings.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.Nautilus.desktop']
 
 [desktop/session]
@@ -199,10 +200,11 @@ idle-delay=uint32 0
 
 [desktop/sound]
 event-sounds=true
-theme-name='freedesktop'
+theme-name='__custom'
 
 [desktop/wm/preferences]
 button-layout='appmenu:minimize,maximize,close'
+num-workspaces=1
 
 [epiphany/state]
 is-maximized=true
@@ -286,6 +288,7 @@ window-is-maximized=false
 window-width=540
 
 [mutter]
+dynamic-workspaces=true
 overlay-key='Super_L'
 
 [nautilus/compression]
@@ -304,6 +307,9 @@ initial-size-file-chooser=(890, 550)
 [nm-applet/eap/5dc573da-04b4-4e42-bf79-f13f2cb60540]
 ignore-ca-cert=false
 ignore-phase2-ca-cert=false
+
+[portal/filechooser/com.brave.Browser]
+last-folder-path='/home/tarmo/Downloads'
 
 [portal/filechooser/com.heroicgameslauncher.hgl]
 last-folder-path='/mnt/pny/heroic'
@@ -345,23 +351,25 @@ welcome-dialog-last-shown-version='43.9'
 
 [shell/extensions/arcmenu]
 distro-icon=1
-menu-background-color='rgba(48,48,49,0.98)'
-menu-border-color='rgb(60,60,60)'
+menu-background-color='rgba(28,28,28,0.98)'
+menu-border-color='rgb(63,62,64)'
 menu-button-appearance='Icon'
 menu-button-fg-color=(false, 'rgb(242,242,242)')
 menu-button-icon='chimera-logo'
-menu-foreground-color='rgb(223,223,223)'
-menu-item-active-bg-color='rgb(25,98,163)'
+menu-font-size=12
+menu-foreground-color='rgb(192,97,203)'
+menu-item-active-bg-color='rgba(228,228,226,0.15)'
 menu-item-active-fg-color='rgb(255,255,255)'
-menu-item-hover-bg-color='rgb(21,83,158)'
+menu-item-hover-bg-color='rgb(192,97,203)'
 menu-item-hover-fg-color='rgb(255,255,255)'
 menu-layout='Windows'
-menu-separator-color='rgba(255,255,255,0.1)'
+menu-separator-color='rgb(63,62,64)'
 multi-monitor=false
+override-menu-theme=true
 pinned-app-list=['Files', '', 'org.gnome.Nautilus.desktop', 'Terminal', '', 'org.gnome.Terminal.desktop', 'Steam', '', 'com.valvesoftware.Steam.desktop', 'yuzu', '', 'org.yuzu_emu.yuzu.desktop', 'Firefox ESR Web Browser', '', 'firefox-esr.desktop', 'Heroic Games Launcher', '', 'com.heroicgameslauncher.hgl.desktop', 'Ryujinx', '', 'org.ryujinx.Ryujinx.desktop', 'Thunderbird', '', 'thunderbird.desktop', 'Calculator', '', 'org.gnome.Calculator.desktop']
-pinned-apps=[{'id': 'org.gnome.Nautilus.desktop'}, {'id': 'org.gnome.Terminal.desktop'}, {'id': 'org.gnome.Calculator.desktop'}, {'id': 'org.ryujinx.Ryujinx.desktop'}, {'id': 'io.github.ryubing.Ryujinx.desktop'}, {'id': 'thunderbird.desktop'}, {'id': 'com.valvesoftware.Steam.desktop'}, {'id': 'org.gnome.Software.desktop'}, {'id': 'firefox-esr.desktop'}, {'id': 'org.gnome.Ptyxis.desktop'}, {'id': 'brave-browser.desktop'}, {'id': 'com.brave.Browser.desktop'}, {'id': 'org.gnome.Console.desktop'}]
+pinned-apps=[{'id': 'org.gnome.Nautilus.desktop'}, {'id': 'org.gnome.Calculator.desktop'}, {'id': 'org.gnome.Software.desktop'}, {'id': 'com.brave.Browser.desktop'}, {'id': 'org.telegram.desktop.desktop'}, {'id': 'org.gnome.Console.desktop'}]
 prefs-visible-page=0
-recently-installed-apps=['com.usebottles.bottles.desktop', 'org.virt_manager.virt-manager.desktop']
+recently-installed-apps=['com.usebottles.bottles.desktop', 'org.virt_manager.virt-manager.desktop', 'org.gnome.Terminal.desktop']
 search-entry-border-radius=(true, 25)
 update-notifier-project-version=71
 
@@ -420,7 +428,7 @@ window-preview-title-position='TOP'
 locations=@av []
 
 [software]
-check-timestamp=int64 1779981606
+check-timestamp=int64 1779984842
 first-run=false
 flatpak-purge-timestamp=int64 1748161378
 install-timestamp=int64 1779127227
