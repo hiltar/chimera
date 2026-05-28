@@ -14,7 +14,13 @@
 ```
 lsblk -f
 
+wipefs -a /dev/nvme0n1
+
+# 2G for EFI
+# Rest for Linux FS
+# Remember to select the type!
 cfdisk /dev/nvme0n1
+
 mkfs.fat -F32 -n EFI /dev/nvme0n1p1
 mkfs.btrfs -L root -f /dev/nvme0n1p2
 
