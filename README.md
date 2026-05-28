@@ -91,6 +91,7 @@ doas ufw status
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.brave.Browser
+flatpak install flathub org.telegram.desktop
 
 # fwupd
 doas fwupdmgr refresh
@@ -110,7 +111,7 @@ tar -xvf Bibata.tar.gz -C ~/.local/share/icons/
 # Install system-wide (for all users)
 # doas tar -xvf Bibata.tar.gz -C /usr/share/icons/
 
-# Battery management for Thinkpad (optional)
+# Battery management for Thinkpad
 
 doas apk add tlp tlp-rdw
 doas dinitctl enable tlp
