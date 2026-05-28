@@ -81,6 +81,10 @@ doas ufw default allow outgoing
 doas ufw enable
 doas ufw status
 
+# CPU microcode
+doas apk add ucode-intel
+
+
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub com.brave.Browser
