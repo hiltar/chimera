@@ -51,8 +51,8 @@ Choose network install.
 Set hostname, timezone, root password.  
 Create your user account during the installer.  
 Select kernel.  
-Install GRUB bootloader.  
-Use the mountpoint for `/media/root/`
+Install systemd-boot bootloader.  
+Install into `/media/root/`
 
 ### 5. Post-installation during live
 ```
@@ -123,4 +123,10 @@ doas apk add bash
 chsh -s /bin/bash
 nano ~/.bashrc
 PS1='\[\e[38;2;255;0;255m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \$ '
+```
+
+### 8. Maintenance
+```
+# Remove unused kernels
+chimera-prunekernels rm all
 ```
