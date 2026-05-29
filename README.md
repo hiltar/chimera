@@ -16,7 +16,7 @@ lsblk -f
 
 wipefs -a /dev/nvme0n1
 
-# 1G for EFI
+# 2G for EFI
 # 4G for swap
 # Rest for Linux FS
 # Remember to select the type!
@@ -40,8 +40,8 @@ mkdir -p /media/root/home
 mount -o subvol=@home,noatime,compress=zstd:3 /dev/nvme0n1p3 /media/root/home
 
 # Mount EFI
-mkdir -p /media/root/boot/efi
-mount /dev/nvme0n1p1 /media/root/boot/efi
+mkdir -p /media/root/boot
+mount /dev/nvme0n1p1 /media/root/boot
 ```
 
 ### 4. Chimera Installer
