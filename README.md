@@ -16,7 +16,7 @@ lsblk -f
 
 wipefs -a /dev/nvme0n1
 
-# 2G for EFI
+# 1G for EFI
 # 4G for swap
 # Rest for Linux FS
 # Remember to select the type!
