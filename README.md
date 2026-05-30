@@ -61,9 +61,9 @@ apk update
 apk add btrfs-progs flatpak ufw wget nano fwupd opendoas bolt bolt-dinit gnome gnome-tweaks gnome-shell-extensions papirus-icon-theme
 
 # Enable important services
-dinitctl -o enable networkmanager      # GNOME default
+dinitctl -o enable networkmanager      # Networking
 dinitctl -o enable ufw                 # Firewall
-dinitctl -o enable gdm                 # GNOME
+dinitctl -o enable gdm                 # GNOME DE
 
 # Configure doas
 echo "permit persist :wheel" > /etc/doas.conf
