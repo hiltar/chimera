@@ -1,16 +1,3 @@
-[2048]
-cols=3
-rows=3
-window-height=600
-window-maximized=false
-window-width=600
-
-[Chess]
-height=782
-last-played-as='white'
-maximized=false
-width=1093
-
 [Console]
 last-window-maximised=false
 last-window-size=(732, 528)
@@ -19,16 +6,6 @@ last-window-size=(732, 528)
 default-profile-uuid='a61e9a46fa6a12562c43f4e56a0b5201'
 profile-uuids=['a61e9a46fa6a12562c43f4e56a0b5201']
 window-size=(uint32 80, uint32 24)
-
-[Robots]
-window-height=566
-window-width=720
-
-[Tetravex]
-saved-game=@m(yyda(yyyyyyyy)ua(yyyyu)) nothing
-window-height=407
-window-is-maximized=false
-window-width=600
 
 [baobab/ui]
 is-maximized=false
