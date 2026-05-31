@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 # 1. Validate input
@@ -14,7 +14,7 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-echo "=== Phase 1: System-Wide Configuration (Root) ==="
+echo "=== Phase 1: System-Wide Configuration ==="
 
 # Package operations (System-wide)
 apk update
@@ -45,8 +45,9 @@ chsh -s /bin/bash "$USERNAME"
 
 echo "=== Phase 2: User-Specific Configuration ==="
 # Switch to the actual user to apply dotfiles and local settings
-su - "$USERNAME" << 'USER_SCRIPT'
-    echo "Applying user settings for $USER..."
+# Note: Using unquoted USER_SCRIPT so $USERNAME evaluates properly
+su - "$USERNAME" << USER_SCRIPT
+    echo "Applying user settings for $USERNAME..."
     
     # Bibata Cursor (Local User)
     mkdir -p ~/.local/share/icons
@@ -55,7 +56,7 @@ su - "$USERNAME" << 'USER_SCRIPT'
 
     # GNOME Settings (dconf requires a D-Bus session)
     wget -q --show-progress -O chimera_settings.dconf https://raw.githubusercontent.com/hiltar/chimera/refs/heads/main/chimera_settings.dconf
-    if command -v dbus-run-session &> /dev/null; then
+    if command -v dbus-run-session > /dev/null 2>&1; then
         dbus-run-session dconf load /org/gnome/ < chimera_settings.dconf
     else
         echo "Warning: dbus-run-session not found. You may need to load dconf settings manually after reboot."
