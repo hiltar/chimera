@@ -44,6 +44,34 @@ flatpak install -y flathub com.mattjakeman.ExtensionManager
 chsh -s /bin/bash "$USERNAME"
 
 echo "=== Phase 2: User-Specific Configuration ==="
+
+# --- PREPARE BASHRC SNIPPET ---
+# We create a temp file as root using a quoted heredoc ('BASHRC_SNIPPET').
+# This ensures root doesn't accidentally evaluate $? or $exit_code.
+cat << 'BASHRC_SNIPPET' > /tmp/bashrc_snippet.sh
+
+# --- Custom Bash Prompt Theme ---
+_build_general_prompt() {
+    local exit_code=$?
+    local reset="\[\e[0m\]"
+
+    local c_user="\[\e[38;2;255;121;198m\]"
+    local c_dir="\[\e[38;2;139;233;253m\]"
+    local c_time="\[\e[38;5;245m\]"
+    local c_prompt="\[\e[38;2;241;250;140m\]"
+    local c_error="\[\e[38;2;255;85;85m\]"
+    local exit_indicator=""
+    
+    if [ $exit_code -ne 0 ]; then
+        exit_indicator="${c_error}✘ $exit_code ${reset}"
+    fi
+
+    PS1="${exit_indicator}${c_time}[\A]${reset} ${c_user}\u@\h${reset} ${c_dir}\w${reset}"$'\n'"${c_prompt}❯${reset} "
+}
+
+PROMPT_COMMAND=_build_general_prompt
+BASHRC_SNIPPET
+
 # Switch to the actual user to apply dotfiles and local settings
 # Note: Using unquoted USER_SCRIPT so $USERNAME evaluates properly
 su - "$USERNAME" << USER_SCRIPT
@@ -63,10 +91,14 @@ su - "$USERNAME" << USER_SCRIPT
     fi
 
     # Shell Configuration (.bashrc)
-    if ! grep -q "PS1=.*255;0;255m" ~/.bashrc 2>/dev/null; then
-        echo "PS1='\[\e[38;2;255;0;255m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \$ '" >> ~/.bashrc
+    # Check for the new function name to prevent duplicates
+    if ! grep -q "_build_general_prompt" ~/.bashrc 2>/dev/null; then
+        cat /tmp/bashrc_snippet.sh >> ~/.bashrc
     fi
 USER_SCRIPT
+
+# Clean up the temporary file
+rm -f /tmp/bashrc_snippet.sh
 
 # Bibata Cursor (System-wide fallback)
 if [ -f "/home/$USERNAME/Bibata.tar.xz" ]; then
