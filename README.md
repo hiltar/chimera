@@ -130,3 +130,7 @@ PS1='\[\e[38;2;255;0;255m\]\u@\h\[\e[0m\] \[\e[38;5;39m\]\w\[\e[0m\] \$ '
 # Remove unused kernels
 chimera-prunekernels rm all
 ```
+```
+# Upgrade firmware fails. Make efivars rewritable. Reboot should make it read-only again.
+sudo mount -o remount,rw /sys/firmware/efi/efivars
+```
