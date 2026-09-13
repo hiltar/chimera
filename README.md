@@ -132,5 +132,5 @@ chimera-prunekernels rm all
 ```
 ```
 # Upgrade firmware fails. Make efivars rewritable. Reboot should make it read-only again.
-sudo mount -o remount,rw /sys/firmware/efi/efivars
+doas mount -o remount,rw /sys/firmware/efi/efivars
 ```
