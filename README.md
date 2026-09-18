@@ -134,3 +134,26 @@ chimera-prunekernels rm all
 # Upgrade firmware fails. Make efivars rewritable. Reboot should make it read-only again.
 doas mount -o remount,rw /sys/firmware/efi/efivars
 ```
+
+---
+
+# KDE Plasma
+
+```
+# Export
+cd "$HOME"
+tar -czf ~/chimera_kde_settings.tar.gz \
+  .config/kdeglobals \
+  .config/kcminputrc \
+  .config/kwinrc \
+  .config/kxkbrc \
+  .config/kcmfonts \
+  .config/plasma-org.kde.plasma.desktop-appletsrc \
+  .config/konsolerc \
+  .config/dolphinrc \
+  .config/mimeapps.list \
+  .local/share/konsole
+
+# Import
+tar -xzf ~/chimera_kde_settings.tar.gz -C "$HOME"
+```
