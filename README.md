@@ -142,7 +142,11 @@ doas mount -o remount,rw /sys/firmware/efi/efivars
 ```
 # Export
 cd "$HOME"
-tar -czf ~/chimera_kde_settings.tar.gz \
+
+OUT="$HOME/chimera_kde_settings.tar.gz"
+LIST="$(mktemp)"
+
+for f in \
   .config/kdeglobals \
   .config/kcminputrc \
   .config/kwinrc \
@@ -153,6 +157,22 @@ tar -czf ~/chimera_kde_settings.tar.gz \
   .config/dolphinrc \
   .config/mimeapps.list \
   .local/share/konsole
+do
+  if [ -e "$f" ]; then
+    printf '%s\n' "$f" >> "$LIST"
+  fi
+done
+
+if [ -s "$LIST" ]; then
+  tar -czf "$OUT" -T "$LIST"
+  echo "Created: $OUT"
+else
+  echo "No KDE configuration files found to export."
+fi
+
+rm -f "$LIST"
+
+##########
 
 # Import
 tar -xzf ~/chimera_kde_settings.tar.gz -C "$HOME"
