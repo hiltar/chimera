@@ -150,13 +150,43 @@ for f in \
   .config/kdeglobals \
   .config/kcminputrc \
   .config/kwinrc \
+  .config/kwinrulesrc \
+  .config/kscreenlockerrc \
+  .config/ksmserverrc \
   .config/kxkbrc \
   .config/kcmfonts \
+  .config/klaunchrc \
+  .config/khotkeysrc \
+  .config/kglobalshortcutsrc \
+  .config/knotifyservicerc \
+  .config/mimeapps.list \
   .config/plasma-org.kde.plasma.desktop-appletsrc \
   .config/konsolerc \
   .config/dolphinrc \
-  .config/mimeapps.list \
-  .local/share/konsole
+  .config/arkrc \
+  .config/spectaclerc \
+  .config/discoverrc \
+  .config/systemsettingsrc \
+  .config/okularrc \
+  .config/gwenviewrc \
+  .config/katecaterc \
+  .config/kwriterc \
+  .config/yakurc \
+  .config/krusaderrc \
+  .config/autostart \
+  .config/gtk-3.0/settings.ini \
+  .config/gtk-4.0/settings.ini \
+  .config/xdg-desktop-portal \
+  .config/plasma-workspace/env \
+  .local/share/konsole \
+  .local/share/plasma \
+  .local/share/color-schemes \
+  .local/share/kscreen \
+  .local/share/user-places.xbel \
+  .local/share/applications \
+  .local/share/icons \
+  .icons \
+  .Xresources
 do
   if [ -e "$f" ]; then
     printf '%s\n' "$f" >> "$LIST"
