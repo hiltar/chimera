@@ -183,10 +183,7 @@ for f in \
   .local/share/color-schemes \
   .local/share/kscreen \
   .local/share/user-places.xbel \
-  .local/share/applications \
-  .local/share/icons \
-  .icons \
-  .Xresources
+  .local/share/applications
 do
   if [ -e "$f" ]; then
     printf '%s\n' "$f" >> "$LIST"
